@@ -1,5 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const Color = require('color');
+// Errror Middle Ware
+const errorHanlder = require("./Middleware/error");
 // Import Routes
 const index = require("./Routes/routes");
 const connectDB = require("./Config/db");
@@ -14,7 +17,6 @@ connectDB();
 const app = express();
 
 // Running Middleware
-app.use(testMiddleware);
 
 // Body Parser
 app.use(express.json());
@@ -22,6 +24,8 @@ app.use(express.json());
 // Mounting Routes
 app.use("/api/v1/bootcamps", index); //Updating Router File with added Link the router  has acces of link which has been passed
 
+// Running Error Middleware
+app.use(errorHanlder);
 const PORT = process.env.PORT || 3000;
 
 const server = app.listen(PORT, () => {

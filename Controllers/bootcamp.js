@@ -1,6 +1,7 @@
 const Bootcamp = require("../Models/Bootcamp");
 const ErrorResponse = require("../Utils/error.js");
 const asyncHandler = require("../Middleware/async.js");
+
 // @desc      Get all bootcamps
 // @route     GET /api/v1/bootcamps
 // @access    Public
@@ -70,3 +71,5 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   }
   res.status(200).json({ success: true, msg: "Deleted" });
 });
+// Craete Bootcamp Slug From Name using Slugify by Pre Middle Ware using mongoose middle ware
+

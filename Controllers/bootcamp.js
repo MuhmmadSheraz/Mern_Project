@@ -6,7 +6,17 @@ const asyncHandler = require("../Middleware/async.js");
 // @route     GET /api/v1/bootcamps
 // @access    Public
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
-  const getAllBootcamps = await Bootcamp.find({});
+  const queryy = req.query;
+  // Comparison Operator With Filter
+  let customQuery = JSON.stringify(queryy).replace(
+    /\b(gt|gte|lt|lte|in)\b/g,
+    (match) => `$${match}`
+  );
+  // const getAllBootcamps = await Bootcamp.find(JSON.parse(customQuery));
+
+  //Normal Query
+  const getAllBootcamps = await Bootcamp.find(req.query);
+
   res.status(200).json({
     success: true,
     msg: getAllBootcamps,
@@ -72,4 +82,3 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, msg: "Deleted" });
 });
 // Craete Bootcamp Slug From Name using Slugify by Pre Middle Ware using mongoose middle ware
-

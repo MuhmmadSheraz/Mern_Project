@@ -37,6 +37,7 @@ const BootcampSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add an address"],
   },
+  quantity: Number,
   location: {
     // GeoJSON Point
     type: {
@@ -100,8 +101,9 @@ const BootcampSchema = new mongoose.Schema({
 });
 BootcampSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });
-  // If you call `next()` with an argument, that argument is assumed to be
-  // an error.
   next();
 });
 module.exports = mongoose.model("Bootcamp", BootcampSchema);
+
+// Map Quest Work Has Not Been Done Yet
+// Map Quest is an Service which allow to get Data Like Longitude and Latitude and City ZipCode Street On Providing Minimun Address
